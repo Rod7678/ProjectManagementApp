@@ -2,6 +2,7 @@ import {useState} from "react";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
 import SidePanel from "./components/SidePanel.jsx";
 import NewProject from "./components/NewProject.jsx";
+import ProjectWindow from "./components/ProjectWindow.jsx";
 
 
 
@@ -18,7 +19,7 @@ function App() {
         selectedProjectId: null,
       };
     });
-    console.log(projectsState.projectList)
+    // console.log(projectsState.projectList)
   }
 
   function handleAddedProject(projectData){
@@ -31,11 +32,19 @@ function App() {
           ...prevState,
           projectList: [...prevState.projectList, newProject],
         };
-      })
+      });
 
     }
-    console.log(projectsState);
+    // console.log(projectsState);
 
+    function handleSelectedProject(projectId){
+      setProjectsState((prevState)=>{
+        return {
+          ...prevState,
+          selectedProjectId: projectId,
+        }
+      })
+    }
   let content;
 
   if(projectsState.selectedProjectId === null){
@@ -43,12 +52,14 @@ function App() {
   }
   else if(projectsState.selectedProjectId === undefined){
     content =  <NoProjectSelected onStartAddProject={handleStartAddProject}/>;
+  }else if(projectsState.selectedProjectId === projectId){
+    content = <ProjectWindow selectedProjectData={projectsState}/>
   }
 
 
   return (
     <main className="h-screen flex my-8 gap-8">
-      <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList}/>
+      <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList} onSelectProject={handleSelectedProject}/>
       {content}
     </main>
   );
