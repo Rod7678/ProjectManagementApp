@@ -22,6 +22,15 @@ function App() {
     });
   }
 
+  function handleSelectedProject(projectId){
+    setProjectsState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: projectId,
+      };
+    });
+  }
+
   function handleAddedProject(projectData){
     setProjectsState((prevState) =>{
       let projectId;
@@ -52,8 +61,8 @@ function App() {
     });
   }
 
-    
-  let content;
+  const selectedProject = projectsState.projectList.find(project => project.id === projectsState.selectedProjectId);
+  let content = <ProjectWindow selectedProjectData={selectedProject}/>;
 
   if(projectsState.selectedProjectId === null){
     content =  <NewProject onAddedProject={handleAddedProject} onCancelProject={handleCancelProject}/>;
@@ -61,15 +70,11 @@ function App() {
   else if(projectsState.selectedProjectId === undefined){
     content =  <NoProjectSelected onStartAddProject={handleStartAddProject}/>;
   }
-  else {
-    content = <ProjectWindow selectedProjectData={projectsState}/>
-  }
 
 
   return (
     <main className="h-screen flex my-8 gap-8">
-      {/* <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList} onSelectProject={handleSelectedProject}/> */}
-      <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList} />
+      <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList} onSelectProject={handleSelectedProject} selectedProjectId={projectsState.selectedProjectId}/>
       {content}
     </main>
   );

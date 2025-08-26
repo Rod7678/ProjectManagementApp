@@ -1,19 +1,27 @@
+import Button from "./Button";
+
 export default function ProjectWindow({selectedProjectData}){
-    console.log(selectedProjectData.projectList.length);
-    let lastProject;
-    if (selectedProjectData.projectList.length > 0) {
-        lastProject = selectedProjectData.projectList.at(-1);
-        // console.log(lastProject);
-    }else if(selectedProjectData.projectList.length === 1 ){
-         lastProject = selectedProjectData.projectList.at(0);
-    }
-    const ProjectTitle = lastProject.title.enteredTitle;
-    const description = lastProject.description.enteredDescription;
-    const projectDate = lastProject.dueDate.enteredDueDate;
-    console.log(ProjectTitle)
+    const ProjectTitle = selectedProjectData.title.enteredTitle;
+    const description = selectedProjectData.description.enteredDescription;
+    const projectDate = selectedProjectData.dueDate.enteredDueDate;
+    const formattedDate = new Date(projectDate).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    })
+
     return (
-        <div className="md:w-full mt-16 bg-slate-600 p-14">
-            <h1>hoii</h1>
+        <div className="md:w-full mt-16 p-14">
+            <header className="mb-4">
+                <div className="flex justify-between">
+                    <h1 className="text-3xl font-bold text-stone-800 capitalize mb-2">{ProjectTitle}</h1>
+                    <Button>Delete</Button>
+                </div>
+                <p className="mb-4 text-stone-400">{formattedDate}</p>
+                <p className="text-stone-600 whitespace-pre-wrap">{description}</p>
+            </header>
+            <hr />
+            Task
         </div>
     )
 }
