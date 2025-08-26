@@ -61,8 +61,17 @@ function App() {
     });
   }
 
+  function handleDeleteProject(){
+    setProjectsState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projectList: prevState.projectList.filter((project)=> project.id !== prevState.selectedProjectId)
+      };
+    });
+  }
   const selectedProject = projectsState.projectList.find(project => project.id === projectsState.selectedProjectId);
-  let content = <ProjectWindow selectedProjectData={selectedProject}/>;
+  let content = <ProjectWindow selectedProjectData={selectedProject} onDeleteProject={handleDeleteProject}/>;
 
   if(projectsState.selectedProjectId === null){
     content =  <NewProject onAddedProject={handleAddedProject} onCancelProject={handleCancelProject}/>;
