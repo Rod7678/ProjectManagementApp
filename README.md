@@ -47,13 +47,14 @@ project-management-app/
 ├── package.json
 └── README.md
 
+```
+---
 
-
-⚡ Getting Started
+## ⚡ Getting Started
 
 Follow these steps to set up and run the project locally:
-
-🔑 Prerequisites
+---
+## 🔑 Prerequisites
 
 Before you start, make sure you have installed:
 
@@ -87,7 +88,7 @@ Visit:
  (for Vite)
 👉 http://localhost:3000/
  (for CRA)
-
+---
 📦 Build for Production
 
 If you want to build an optimized production version:
@@ -101,7 +102,7 @@ npm install -g serve
 serve -s dist   # for Vite
 # OR
 serve -s build  # for CRA
-
+---
 🎯 Future Enhancements
 
 🔐 Add Authentication (Login/Signup)
