@@ -65,21 +65,27 @@ npm
  (comes with Node) or yarn
 
 Check versions:
+```bash
 node -v
 npm -v
-
+```
 
 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/your-username/project-management-app.git
 cd project-management-app
-
+```
 2️⃣ Install Dependencies
+```bash
 npm install
+```
 
 3️⃣ Run the Development Server
+```bash
 npm run dev   # if using Vite
 # OR
 npm start     # if using Create React App
+```
 
 4️⃣ Open in Browser
 
