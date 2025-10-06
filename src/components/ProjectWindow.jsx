@@ -1,7 +1,7 @@
 import Button from "./Button.jsx";
 import Tasks from "./Tasks.jsx";
 
-export default function ProjectWindow({selectedProjectData, onDeleteProject, onAddTask, onDeleteTask, tasks}){
+export default function ProjectWindow({selectedProjectData, onDeleteProject}){
     const ProjectTitle = selectedProjectData.title.enteredTitle;
     const description = selectedProjectData.description.enteredDescription;
     const projectDate = selectedProjectData.dueDate.enteredDueDate;
@@ -21,7 +21,7 @@ export default function ProjectWindow({selectedProjectData, onDeleteProject, onA
                 <p className="mb-4 text-stone-400">{formattedDate}</p>
                 <p className="text-stone-600 whitespace-pre-wrap">{description}</p>
             </header>
-            <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks}/>
+            <Tasks />
         </div>
     )
 }
