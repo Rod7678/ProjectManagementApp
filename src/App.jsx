@@ -3,6 +3,7 @@ import NoProjectSelected from "./components/NoProjectSelected.jsx";
 import SidePanel from "./components/SidePanel.jsx";
 import NewProject from "./components/NewProject.jsx";
 import ProjectWindow from "./components/ProjectWindow.jsx";
+import {ProjectContext} from "./components/TaskContext.jsx"
 
 
 
@@ -95,14 +96,13 @@ function App() {
       };
     });
   }
+
   const selectedProject = projectsState.projectList.find(project => project.id === projectsState.selectedProjectId);
+
   let content = (
   <ProjectWindow 
   selectedProjectData={selectedProject} 
   onDeleteProject={handleDeleteProject} 
-  onAddTask={handleAddTask} 
-  onDeleteTask={handleDeleteTask}
-  tasks={projectsState.tasks}
   />);
 
   if(projectsState.selectedProjectId === null){
@@ -112,11 +112,21 @@ function App() {
     content =  <NoProjectSelected onStartAddProject={handleStartAddProject}/>;
   }
 
-
+  const ctxValue = {
+    tasks: projectsState.tasks,
+    addingTask: handleAddTask,
+    deleteTask: handleDeleteTask,
+  }
   return (
     <main className="h-screen flex my-8 gap-8">
-      <SidePanel onStartAddProject={handleStartAddProject} projectList={projectsState.projectList} onSelectProject={handleSelectedProject} selectedProjectId={projectsState.selectedProjectId}/>
+      <SidePanel
+       onStartAddProject={handleStartAddProject}
+       projectList={projectsState.projectList} 
+       onSelectProject={handleSelectedProject} 
+       selectedProjectId={projectsState.selectedProjectId}/>
+      <ProjectContext.Provider value={ctxValue}>
       {content}
+      </ProjectContext.Provider >
     </main>
   );
 }
